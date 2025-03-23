@@ -1,0 +1,16 @@
+htmlCopy code<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Image Caption Generator</title></head><body><h1>Upload Image for Caption</h1><input type="file" id="imageInput"><button onclick="uploadImage()">Upload</button><h2>Generated Caption:</h2><p id="caption"></p><script>function uploadImage() {
+      const input = document.getElementById('imageInput');
+      const file = input.files[0];
+      const formData = new FormData();
+      formData.append('file', file);
+
+      fetch('https://YOUR_API_GATEWAY_ENDPOINT', {
+        method: 'POST',
+        body: formData,
+      })      .then(response => response.json())
+      .then(data => {
+        document.getElementById('caption').innerText = data.caption;
+      })
+      .catch(err => console.error('Error:', err));
+    }
+  </script></body></html>
